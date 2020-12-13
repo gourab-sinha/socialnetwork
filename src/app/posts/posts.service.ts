@@ -23,7 +23,6 @@ export class PostsService{
             this.posts = transformedPosts;
             this.postsUpdated.next([...this.posts]);
         });
-
     }
 
     getPostUpdateListener(){
@@ -41,5 +40,13 @@ export class PostsService{
             this.posts.push(post);
             this.postsUpdated.next([...this.posts]);
         });
+    }
+
+    deletePost(postId: string){
+        this.http.delete("http://localhost:3000/api/posts/" + postId).subscribe(()=>{
+            const updatedPost = this.posts.filter(post => post.id !== postId);
+            this.posts = updatedPost;
+            this.postsUpdated.next([...this.posts]);
+        })
     }
 }

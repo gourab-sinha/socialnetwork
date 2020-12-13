@@ -36,9 +36,19 @@ app.post("/api/posts", (req, res, next)=>{
     });
 });
 
+app.delete("/api/posts/:id",(req,res,next)=>{
+    Post.deleteOne({_id: req.params.id}).then((result)=>{
+        console.log(result);
+        res.status(200).json({
+            message: "Post deleted!"
+        });
+    });
+    
+});
+
 app.use('/api/posts/', (req,res,next)=>{
     Post.find().then(documents =>{
-        console.log(documents);
+        // console.log(documents);
         res.status(200).json({
             message: 'Posts fetched successfully!',
             posts: documents
@@ -60,6 +70,8 @@ app.use('/api/posts/', (req,res,next)=>{
     // ];
     
 });
+
+
 
 module.exports = app;
 
