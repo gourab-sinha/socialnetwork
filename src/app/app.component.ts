@@ -7,9 +7,4 @@ import { Post } from './posts/posts.model';
 })
 export class AppComponent {
   title = 'socialnetwork';
-  storedPosts: Post[] = [];
-
-  onPostAdded(post){
-    this.storedPosts.push(post);
-  }
 }
