@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Post } from './posts/posts.model';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'socialnetwork';
+  storedPosts: Post[] = [];
+
+  onPostAdded(post){
+    this.storedPosts.push(post);
+  }
 }
