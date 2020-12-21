@@ -2,9 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const postRoutes = require('./routes/posts');
-
+const path = require('path');
 
 const mongoose = require('mongoose');
+const { pathToFileURL } = require('url');
 mongoose.connect('mongodb://localhost:27017/socialnetwork', {useNewUrlParser: true}).then(()=>{
     console.log('Connected to database!');
 }).catch(()=>{
@@ -14,6 +15,8 @@ mongoose.connect('mongodb://localhost:27017/socialnetwork', {useNewUrlParser: tr
 
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use("/images", express.static('backend/images'));
 
 app.use((req,res,next)=>{
     res.setHeader('Access-Control-Allow-Origin', "*");
