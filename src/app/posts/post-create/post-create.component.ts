@@ -3,7 +3,6 @@ import { Post } from '../posts.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PostsService } from '../posts.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { read } from 'fs';
 import { mimeType } from './mime-type.validator';
 
 @Component({
@@ -63,7 +62,7 @@ export class PostCreateComponent implements OnInit {
 
     this.isLoading = true;
     if(this.mode === 'create'){
-      this.postService.addPost(this.form.value.title, this.form.value.content);
+      this.postService.addPost(this.form.value.title, this.form.value.content, this.form.value.image);
     }
     else{
       this.postService.updatePost(this.postId, this.form.value.title, this.form.value.content);
