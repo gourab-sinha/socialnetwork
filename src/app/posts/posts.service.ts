@@ -11,8 +11,11 @@ export class PostsService{
     private postsUpdated = new Subject<Post[]>();
 
     constructor(private http: HttpClient, private router: Router){}
-    getPosts(){
-        this.http.get<{message: string, posts: any}>('http://localhost:3000/api/posts/').pipe(
+    getPosts(postPerPage: number, currentPage: number){
+        console.log(postPerPage);
+        console.log(currentPage);
+        const queryParams = `?pagesize=${postPerPage}&page=${currentPage}`;
+        this.http.get<{message: string, posts: any}>('http://localhost:3000/api/posts/' + queryParams).pipe(
             map(postData => {
                 return postData.posts.map(post => {
                     return {
