@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const postRoutes = require('./routes/posts');
+const userRoutes = require('./routes/user');
+
 const path = require('path');
 
 const mongoose = require('mongoose');
@@ -30,6 +32,7 @@ app.use((req,res,next)=>{
 });
 
 app.use("/api/posts", postRoutes);
+app.use("/api/user", userRoutes);
 module.exports = app;
 
 // mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
