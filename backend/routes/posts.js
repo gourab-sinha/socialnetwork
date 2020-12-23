@@ -38,20 +38,24 @@ router.post("",checkAuth, multer({storage: storage}).single("image"),(req, res, 
     const post = new Post({
         title: req.body.title,
         content: req.body.content,
-        imagePath: url + "/images/" + req.file.filename
+        imagePath: url + "/images/" + req.file.filename,
+        creator: req.userData.userId
     });
-    console.log("POST REQUEST");
-    console.log(req.file.filename);
-    console.log(post.imagePath);
+    
+    // console.log("POST REQUEST");
+    // console.log(req.file.filename);
+    // console.log(post.imagePath);
     post.save().then(createdPost=>{
         console.log(createdPost.imagePath);
+        console.log("Saved");
         res.status(200).json({
             message: 'Post added successfully',
             post: {
                 id: createdPost._id,
                 title: createdPost.title,
                 content: createdPost.content,
-                imagePath: createdPost.imagePath
+                imagePath: createdPost.imagePath,
+                creator: req.userData.userId
             }
         });
         console.log(post);
