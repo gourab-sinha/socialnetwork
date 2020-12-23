@@ -19,7 +19,10 @@ export class AuthService{
         };
 
         this.http.post("http://localhost:3000/api/user/signup", authData).subscribe(response => {
+            
+            console.log("Successful");
             console.log(response);
+            this.login(email,password);
         });
     }
     getIsAuth(){
